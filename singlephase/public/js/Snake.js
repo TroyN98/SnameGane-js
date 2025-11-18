@@ -1,6 +1,8 @@
 export default class Snake {
     constructor(scene) {
         this.scene = scene;
+        this.lastMoveTime = 0;
+        this.moveInterval = 500; //millisecs
         this.body = [];
         this.direction = Phaser.Math.Vector2.DOWN;
         this.body.push(this.scene.add.rectangle(100, 100, 16, 16, 0xff0000).setOrigin(0));
@@ -31,7 +33,15 @@ export default class Snake {
     }
 
     update(time) {
-        this.body[0].x += this.direction.x;
-        this.body[0].y += this.direction.y;
+        if (time >= this.lastMoveTime + this.moveInterval) {
+            this.lastMoveTime = time;
+
+            this.move();
+        }
+    }
+
+    move() {
+        this.body[0].x += this.direction.x * 16;
+        this.body[0].y += this.direction.y * 16;
     }
 }
