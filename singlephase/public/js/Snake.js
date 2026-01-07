@@ -57,7 +57,7 @@ export default class Snake {
 
         if (this.apple.x === x && this.apple.y === y) {
             //eaten apple annd increase body size
-            this.body.push(this.scene.add.rectangle(0,0,this.tileSize,this.tileSize,0xffffff).setOrigin(0));
+            this.body.push(this.scene.add.rectangle(0, 0, this.tileSize, this.tileSize, 0xffffff).setOrigin(0));
             //new position forapple
             this.positionApple();
         }
@@ -69,5 +69,15 @@ export default class Snake {
         }
         this.body[0].x = x;
         this.body[0].y = y;
+
+        //death of snake 
+        if (this.body[0].x < 0 ||
+            this.body[0].x >= this.scene.game.config.width ||
+            this.body[0].y < 0 ||
+            this.body[0].y >= this.scene.game.config.heighssst) {
+
+                this.scene.scene.restart();
+        }
+
     }
 }
